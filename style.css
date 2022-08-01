@@ -1,0 +1,30 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+header,
+footer {
+    background-color: rgb(4, 121, 231);
+    text-align: center;
+    color: white;
+    grid-column: span 2;
+}
+
+
+body {
+    display: grid;
+    grid-template-rows: 1fr 20fr 0.5fr;
+    grid-template-columns: minmax(8rem, 1fr) 7fr;
+    margin: 0;
+}
+
+main {
+    background-color: lightgray;
+}
+
+#search-section {
+    border-right: 0.05rem solid rgba(0, 0, 0, 0.294);
+
+}
+
+footer {}
