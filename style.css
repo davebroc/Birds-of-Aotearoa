@@ -32,11 +32,18 @@ main {
 }
 
 .bird-textbox {
+    width: 100%;
     padding: 0.5rem;
     display: grid;
     grid-template-columns: max-content max-content;
     justify-content: space-between;
     gap: 10%;
+}
+
+.valuebox,
+.keybox {
+    width: 50%;
+
 }
 
 
