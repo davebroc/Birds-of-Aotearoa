@@ -13,13 +13,43 @@ footer {
 
 body {
     display: grid;
-    grid-template-rows: 1fr 20fr 0.5fr;
     grid-template-columns: minmax(8rem, 1fr) 7fr;
+    grid-auto-rows: 1vh minmax(20fr, auto) 0.5fr;
     margin: 0;
 }
 
 main {
     background-color: lightgray;
+    padding: 20px;
+}
+
+.bird-main-img {
+    width: 100%;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.birdArticle {
+    background-color: rgb(247, 245, 245);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 1rem;
+
+}
+
+.article-header {}
+
+#bird-content-container {
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    grid-template-columns: repeat(3, 25vw);
+    gap: 0.5rem;
+    padding-top: 0.5rem;
 }
 
 #search-section {
