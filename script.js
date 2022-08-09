@@ -28,33 +28,23 @@ function newBirdHeaderElement(className, data) {
 
 
 function newBirdTextElement(className, data) {
-    const textBox = document.createElement('div');
+    const textBox = document.createElement('dl');
     textBox.setAttribute('class', className);
 
-    const keybox = document.createElement('div');
-    const valuebox = document.createElement('div');
-    keybox.setAttribute('class', 'keybox');
-    valuebox.setAttribute('class', 'valuebox');
 
-    newDescriptionKeyValue(keybox, valuebox, 'scientific_name', data);
-    newDescriptionKeyValue(keybox, valuebox, 'family', data);
-    newDescriptionKeyValue(keybox, valuebox, 'order', data);
-    newDescriptionKeyValue(keybox, valuebox, 'status', data);
-    newDescriptionKeyValue(keybox, valuebox, 'length', data);
-    newDescriptionKeyValue(keybox, valuebox, 'weight', data);
-
-
-
-    textBox.append(keybox);
-    textBox.append(valuebox);
-
+    newDescriptionKeyValue(textBox, 'scientific_name', data);
+    newDescriptionKeyValue(textBox, 'family', data);
+    newDescriptionKeyValue(textBox, 'order', data);
+    newDescriptionKeyValue(textBox, 'status', data);
+    newDescriptionKeyValue(textBox, 'weight', data);
+    newDescriptionKeyValue(textBox, 'length', data);
 
     return textBox;
 }
 
-function newDescriptionKeyValue(keybox, valuebox, key, data) {
-    const valueLine = document.createElement('p');
-    const keyLine = document.createElement('p');
+function newDescriptionKeyValue(textBox, key, data) {
+    const valueLine = document.createElement('dd');
+    const keyLine = document.createElement('dt');
 
     if (key === 'length' || key === 'weight') {
         valueLine.innerHTML = data.size[key].value + ' ' + data.size[key].units;
@@ -65,8 +55,8 @@ function newDescriptionKeyValue(keybox, valuebox, key, data) {
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
     }
 
-    keybox.append(keyLine);
-    valuebox.append(valueLine);
+    textBox.append(keyLine);
+    textBox.append(valueLine);
 
 }
 

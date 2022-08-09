@@ -23,28 +23,28 @@ main {
     padding: 20px;
 }
 
-.bird-main-img {
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
 
-}
 
+/* 
 .bird-textbox {
     width: 100%;
     padding: 0.5rem;
-    display: grid;
-    grid-template-columns: max-content max-content;
-    justify-content: space-between;
     gap: 10%;
+} */
+
+dl {
+    padding: 0.5rem;
 }
 
-.valuebox,
-.keybox {
+dd,
+dt {
+    float: left;
+    padding: 0;
+    margin: 0;
     width: 50%;
-
 }
+
+
 
 
 
@@ -64,12 +64,20 @@ main {
     margin-bottom: 0;
 }
 
+.bird-main-img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+}
+
 #bird-content-container {
     display: grid;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: stretch;
-    grid-template-columns: repeat(auto-fit, 25vw);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 20rem));
     gap: 2rem;
     padding-top: 0.5rem;
 }
