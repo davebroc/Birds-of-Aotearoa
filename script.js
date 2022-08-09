@@ -2,6 +2,19 @@ fetchData();
 let birds;
 
 
+const statusColors = new Map();
+statusColors.set('Not Threatened', '#02a028');
+statusColors.set('Naturally Uncommon', '#649a31');
+statusColors.set('Relict', '#99cb68');
+statusColors.set('Recovering', '#fecc33');
+statusColors.set('Declining', '#fe9a01');
+statusColors.set('Nationally Increasing', '#c26967');
+statusColors.set('Nationally Vulnerable', '#9b0000');
+statusColors.set('Nationally Endangered', '#660032');
+statusColors.set('Nationally Critical', '#320033');
+statusColors.set('Extinct', '#000000');
+statusColors.set('Data Deficient', '#000000');
+
 const searchInput = document.querySelector('[data-search]');
 searchInput.addEventListener("input", e => {
     const value = e.target.value.toLowerCase();
@@ -25,7 +38,6 @@ function createBirdElement(bird) {
     const birdArticle = document.createElement('article');
     birdArticle.setAttribute('class', 'birdArticle');
     birdArticle.append(newImgElement('bird-main-img', bird));
-    birdArticle.append(newCircleOverlayElement('circle-overlay', bird));
     birdArticle.append(newBirdHeaderElement('bird-header', bird));
     birdArticle.append(newBirdTextElement('bird-textbox', bird));
 
@@ -34,13 +46,26 @@ function createBirdElement(bird) {
 }
 
 function newCircleOverlayElement(className, bird) {
-    const circle = document.createElement('span');
-    circle.setAttribute('class', className);
-    // circle.innerHTML = bird.primary_name;
+    const circleOuter = document.createElement('span');
+    circleOuter.setAttribute('class', className);
+
+    const circleInner = document.createElement('span');
+    circleInner.setAttribute('class', 'circle-status');
+    circleInner.style.backgroundColor = statusColors.get(bird.status);
+
+    circleOuter.append(circleInner);
 
 
 
-    return circle;
+    return circleOuter;
+}
+
+function newBirdHeaderElement(className, data) {
+    const header = document.createElement('h3');
+    header.innerHTML = data.english_name;
+    header.setAttribute('class', 'article-header');
+
+    return header;
 }
 
 
@@ -69,9 +94,10 @@ function newImgElement(className, data) {
     img.setAttribute('class', className);
     img.setAttribute('src', data.photo.source);
     img.setAttribute('alt', data.english_name);
-    container.setAttribute('class', 'overlay-container')
+    container.setAttribute('class', 'overlay-container');
 
     container.append(img);
+    container.append(newCircleOverlayElement('circle-overlay', bird));
     container.append(newImageOverlayElement('bird-img-text', bird));
 
     return container;
@@ -79,14 +105,6 @@ function newImgElement(className, data) {
 
 
 
-
-function newBirdHeaderElement(className, data) {
-    const header = document.createElement('h3');
-    header.innerHTML = data.english_name;
-    header.setAttribute('class', 'article-header');
-
-    return header;
-}
 
 
 function newBirdTextElement(className, data) {
