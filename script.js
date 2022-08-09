@@ -8,6 +8,7 @@ function createBirdElement(bird) {
     birdArticle.append(newImgElement('bird-main-img', bird));
     birdArticle.append(newBirdHeaderElement('bird-header', bird));
     birdArticle.append(newBirdTextElement('bird-textbox', bird));
+    // birdArticle.append(newImageOverlayElement('bird-img-overlay', bird));
 
 
 
@@ -17,6 +18,41 @@ function createBirdElement(bird) {
 
     document.querySelector('#bird-content-container').prepend(birdArticle);
 }
+
+function newImageOverlayElement(className, data) {
+    const container = document.createElement('div');
+    const name = document.createElement('h2');
+    const credit = document.createElement('h4');
+
+    name.innerHTML = data.primary_name;
+    name.setAttribute('class', 'overlay-name');
+    credit.innerHTML = "Photo by " + data.photo.credit;
+    credit.setAttribute('class', 'overlay-credit');
+    container.setAttribute('class', className);
+
+    container.append(name);
+    container.append(credit);
+
+    return container;
+}
+
+
+function newImgElement(className, data) {
+    const container = document.createElement('div');
+    const img = document.createElement('img');
+    img.setAttribute('class', className);
+    img.setAttribute('src', data.photo.source);
+    img.setAttribute('alt', data.english_name);
+    container.setAttribute('class', 'overlay-container')
+
+    container.append(img);
+    container.append(newImageOverlayElement('bird-img-text', bird));
+
+    return container;
+}
+
+
+
 
 function newBirdHeaderElement(className, data) {
     const header = document.createElement('h3');
@@ -70,12 +106,7 @@ function newDescriptionKeyValue(textBox, key, data) {
 
 
 
-function newImgElement(className, data) {
-    const e = document.createElement('img');
-    e.setAttribute('class', className);
-    e.setAttribute('src', data.photo.source);
-    return e;
-}
+
 
 
 function fetchData() {
