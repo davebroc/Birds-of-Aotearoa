@@ -13,7 +13,7 @@ footer {
 
 body {
     display: grid;
-    grid-template-columns: minmax(8rem, 1fr) 7fr;
+    grid-template-columns: minmax(10rem, 14rem) 7fr;
     grid-auto-rows: 1vh minmax(20fr, auto) 0.5fr;
     margin: 0;
 }
@@ -22,6 +22,32 @@ main {
     background-color: lightgray;
     padding: 20px;
 }
+
+
+#search-section {
+    border-right: 0.05rem solid rgba(0, 0, 0, 0.294);
+    display: flex;
+    flex-direction: column;
+}
+
+#search-section h3 {
+    margin-left: 1rem;
+}
+
+
+#search-input {
+    width: 80%;
+    margin-left: 1rem;
+    line-height: 1.5rem;
+}
+
+.hide {
+    display: none !important;
+}
+
+
+
+
 
 .bird-main-img {
     width: 100%;
@@ -106,9 +132,6 @@ dd {
     padding-top: 0.5rem;
 }
 
-#search-section {
-    border-right: 0.05rem solid rgba(0, 0, 0, 0.294);
 
-}
 
 footer {}

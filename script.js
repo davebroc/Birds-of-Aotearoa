@@ -1,3 +1,22 @@
+fetchData();
+let birds;
+
+
+const searchInput = document.querySelector('[data-search]');
+searchInput.addEventListener("input", e => {
+    const value = e.target.value.toLowerCase();
+
+    birds.forEach(bird => {
+        const isVisible = bird.primary_name.toLowerCase().includes(value) || bird.english_name.toLowerCase().includes(value) || bird.scientific_name.toLowerCase().includes(value) || bird.family.toLowerCase().includes(value) || bird.order.toLowerCase().includes(value);
+        bird.articleElement.classList.toggle('hide', !isVisible);
+
+    })
+
+
+
+})
+
+
 
 
 
@@ -8,15 +27,9 @@ function createBirdElement(bird) {
     birdArticle.append(newImgElement('bird-main-img', bird));
     birdArticle.append(newBirdHeaderElement('bird-header', bird));
     birdArticle.append(newBirdTextElement('bird-textbox', bird));
-    // birdArticle.append(newImageOverlayElement('bird-img-overlay', bird));
-
-
-
-
-
-
 
     document.querySelector('#bird-content-container').prepend(birdArticle);
+    return birdArticle;
 }
 
 function newImageOverlayElement(className, data) {
@@ -114,10 +127,11 @@ function fetchData() {
     fetch('./data/nzbird.json') // fetch data from API
         .then(response => response.json()) // parse to JSON
         .then(data => {
-            console.log(data)
+
             for (bird of data) {
-                createBirdElement(bird);
+                bird.articleElement = createBirdElement(bird);
             }
+            birds = data;
 
 
         }) // use the data
@@ -128,4 +142,3 @@ function fetchData() {
 
         .catch(error => console.error(error)) // error handling
 }
-fetchData();
