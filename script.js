@@ -25,12 +25,25 @@ function createBirdElement(bird) {
     const birdArticle = document.createElement('article');
     birdArticle.setAttribute('class', 'birdArticle');
     birdArticle.append(newImgElement('bird-main-img', bird));
+    birdArticle.append(newCircleOverlayElement('circle-overlay', bird));
     birdArticle.append(newBirdHeaderElement('bird-header', bird));
     birdArticle.append(newBirdTextElement('bird-textbox', bird));
 
     document.querySelector('#bird-content-container').prepend(birdArticle);
     return birdArticle;
 }
+
+function newCircleOverlayElement(className, bird) {
+    const circle = document.createElement('span');
+    circle.setAttribute('class', className);
+    // circle.innerHTML = bird.primary_name;
+
+
+
+    return circle;
+}
+
+
 
 function newImageOverlayElement(className, data) {
     const container = document.createElement('div');
