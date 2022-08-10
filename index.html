@@ -16,9 +16,40 @@
     </header>
 
     <section id="search-section">
-        <h3>Filter Birds</h3>
-        <div id="search-wrapper">
+        <div id="filter-and-status-wrapper">
+            <h3>Filter Birds</h3>
             <input type="text" id="search-input" placeholder="Search" data-search>
+
+            <label for="conservation-selector" id="conservation-selector-label">Conservation Status</label>
+            <select id="conservation-selector" name="conservation-selector">
+                <option value="All">All</option>
+                <option value="Not Threatened">Not Threatened</option>
+                <option value="Naturally Uncommon">Naturally Uncommon</option>
+                <option value="Relict">Relict</option>
+                <option value="Recovering">Recovering</option>
+                <option value="Declining">Declining</option>
+                <option value="Nationally Increasing">Nationally Increasing</option>
+                <option value="Nationally Vulnerable">Nationally Vulnerable</option>
+                <option value="Nationally Endangered">Nationally Endangered</option>
+                <option value="Nationally Critical">Nationally Critical</option>
+                <option value="Extinct">Extinct</option>
+                <option value="Data Deficient">Data Deficient</option>
+            </select>
+
+            <label for="sortby">Sort by</label>
+            <select id="sortby">
+                <option value="English Name A-Z">English Name A-Z</option>
+                <option value="English Name Z-A">English Name Z-A</option>
+                <option value="Lightest to heaviest">Lightest to heaviest</option>
+                <option value="heaviest to lightest">Heaviest to lightest</option>
+                <option value="Largest to smallest">Largest to smallest</option>
+                <option value="smallest to Largest">Largest to Largest</option>
+                <option value="Least Threatened">Least Threatened</option>
+                <option value="Most Threatened">Most Threatened</option>
+            </select>
+
+            <button id="filter-button">FILTER RESULTS</button>
+
         </div>
 
 

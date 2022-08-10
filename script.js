@@ -16,20 +16,34 @@ statusColors.set('Extinct', '#000000');
 statusColors.set('Data Deficient', '#000000');
 
 const searchInput = document.querySelector('[data-search]');
-searchInput.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
+const filterButton = document.querySelector('#filter-button');
+
+searchInput.addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+        filterButton.click();
+    }
+
+});
+
+filterButton.addEventListener('click', e => {
+    const searchInput = document.querySelector('[data-search]');
+    const searchValue = searchInput.value.toLowerCase();
+
+    const statusFilter = document.querySelector('#conservation-selector');
+    const statusValue = statusFilter.value;
+    const isStatusAll = statusValue === "All";
 
     birds.forEach(bird => {
-        const isVisible = bird.primary_name.toLowerCase().includes(value) || bird.english_name.toLowerCase().includes(value) || bird.scientific_name.toLowerCase().includes(value) || bird.family.toLowerCase().includes(value) || bird.order.toLowerCase().includes(value);
+        const isSearched = bird.primary_name.toLowerCase().includes(searchValue) || bird.english_name.toLowerCase().includes(searchValue) || bird.scientific_name.toLowerCase().includes(searchValue) || bird.family.toLowerCase().includes(searchValue) || bird.order.toLowerCase().includes(searchValue);
+        const isStatus = bird.status.includes(statusValue) || isStatusAll;
+
+        const isVisible = isStatus && isSearched;
         bird.articleElement.classList.toggle('hide', !isVisible);
-
-    })
-
+    });
 
 
-})
 
-
+});
 
 
 
