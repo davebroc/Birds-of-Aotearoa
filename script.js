@@ -1,19 +1,113 @@
 fetchData();
 let birds;
 
+const sortAZ = (x, y) => {
+    let a = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let b = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
+const sortZA = (x, y) => {
+    let b = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let a = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
 
-const statusColors = new Map();
-statusColors.set('Not Threatened', '#02a028');
-statusColors.set('Naturally Uncommon', '#649a31');
-statusColors.set('Relict', '#99cb68');
-statusColors.set('Recovering', '#fecc33');
-statusColors.set('Declining', '#fe9a01');
-statusColors.set('Nationally Increasing', '#c26967');
-statusColors.set('Nationally Vulnerable', '#9b0000');
-statusColors.set('Nationally Endangered', '#660032');
-statusColors.set('Nationally Critical', '#320033');
-statusColors.set('Extinct', '#000000');
-statusColors.set('Data Deficient', '#000000');
+
+
+
+
+const statuses =
+    [
+        {
+            threat_level: 0,
+            status: 'Not Threatened',
+            color: '#02a028'
+        },
+        {
+            threat_level: 1,
+            status: 'Naturally Uncommon',
+            color: '#649a31'
+        },
+        {
+            threat_level: 2,
+            status: 'Relict',
+            color: '#99cb68'
+        },
+        {
+            threat_level: 3,
+            status: 'Recovering',
+            color: '#fecc33'
+        },
+        {
+            threat_level: 4,
+            status: 'Declining',
+            color: '#fe9a01'
+        },
+        {
+            threat_level: 5,
+            status: 'Nationally Increasing',
+            color: '#c26967'
+        },
+        {
+            threat_level: 6,
+            status: 'Nationally Vulnerable',
+            color: '#9b0000'
+        },
+        {
+            threat_level: 7,
+            status: 'Nationally Endangered',
+            color: '#660032'
+        },
+        {
+            threat_level: 8,
+            status: 'Nationally Critical',
+            color: '#320033'
+        },
+        {
+            threat_level: 9,
+            status: 'Extinct',
+            color: '#000000'
+        },
+        {
+            threat_level: 10,
+            status: 'Data Deficient',
+            color: '#000000'
+        },
+    ];
+
+const sortLeastThreat = (x, y) => {
+    let a, b;
+    statuses.forEach(obj => {
+        if (obj.status === x.status) {
+            a = obj.threat_level;
+        }
+        if (obj.status === y.status) {
+            b = obj.threat_level;
+        }
+
+    });
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
+
+const sortMostThreat = (x, y) => {
+    let a, b;
+    statuses.forEach(obj => {
+        if (obj.status === x.status) {
+            b = obj.threat_level;
+        }
+        if (obj.status === y.status) {
+            a = obj.threat_level;
+        }
+
+    });
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
+
+const sortFunctions = new Map();
+sortFunctions.set('A-Z', sortAZ);
+sortFunctions.set('Z-A', sortZA);
+sortFunctions.set('Least Threatened', sortLeastThreat);
+sortFunctions.set('Most Threatened', sortMostThreat);
 
 const searchInput = document.querySelector('[data-search]');
 const filterButton = document.querySelector('#filter-button');
@@ -22,28 +116,36 @@ searchInput.addEventListener("keypress", e => {
     if (e.key === "Enter") {
         filterButton.click();
     }
-
 });
+
+
 
 filterButton.addEventListener('click', e => {
     const searchInput = document.querySelector('[data-search]');
-    const searchValue = searchInput.value.toLowerCase();
+    const searchValue = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     const statusFilter = document.querySelector('#conservation-selector');
     const statusValue = statusFilter.value;
     const isStatusAll = statusValue === "All";
 
+    const sortby = document.querySelector('#sortby');
+    birds.sort(sortFunctions.get(sortby.value));
+
+
+    let i = 0;
     birds.forEach(bird => {
-        const isSearched = bird.primary_name.toLowerCase().includes(searchValue) || bird.english_name.toLowerCase().includes(searchValue) || bird.scientific_name.toLowerCase().includes(searchValue) || bird.family.toLowerCase().includes(searchValue) || bird.order.toLowerCase().includes(searchValue);
+        const isSearched = bird.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(searchValue) || bird.english_name.toLowerCase().includes(searchValue) || bird.scientific_name.toLowerCase().includes(searchValue) || bird.family.toLowerCase().includes(searchValue) || bird.order.toLowerCase().includes(searchValue);
         const isStatus = bird.status.includes(statusValue) || isStatusAll;
 
         const isVisible = isStatus && isSearched;
         bird.articleElement.classList.toggle('hide', !isVisible);
+
+        bird.articleElement.style.order = i++;
     });
 
-
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
 
 
 
@@ -65,7 +167,13 @@ function newCircleOverlayElement(className, bird) {
 
     const circleInner = document.createElement('span');
     circleInner.setAttribute('class', 'circle-status');
-    circleInner.style.backgroundColor = statusColors.get(bird.status);
+    statuses.forEach(obj => {
+        if (obj.status === bird.status) {
+            circleInner.style.backgroundColor = obj.color;
+            return;
+        }
+
+    });
 
     circleOuter.append(circleInner);
 

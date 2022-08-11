@@ -56,6 +56,7 @@ label {
 
 #filter-and-status-wrapper>select {
     margin-top: 0rem;
+    height: 1.2rem;
 }
 
 #filter-and-status-wrapper>button {
@@ -64,6 +65,16 @@ label {
     border-radius: 0.5rem;
     padding: 0;
     margin-top: 0.25rem;
+}
+
+#filter-and-status-wrapper>button:hover {
+    cursor: pointer;
+}
+
+#filter-and-status-wrapper>button:active {
+    transition: 0.3s;
+    background-color: rgb(2, 106, 202);
+    box-shadow: 0 1px #666;
 }
 
 #search-input {
