@@ -65,6 +65,8 @@ label {
     border-radius: 0.5rem;
     padding: 0;
     margin-top: 0.25rem;
+    color: white;
+    font-weight: 700;
 }
 
 #filter-and-status-wrapper>button:hover {
