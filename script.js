@@ -1,21 +1,6 @@
 fetchData();
 let birds;
 
-const sortAZ = (x, y) => {
-    let a = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    let b = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    return (a == b ? 0 : a > b ? 1 : -1);
-}
-const sortZA = (x, y) => {
-    let b = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    let a = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    return (a == b ? 0 : a > b ? 1 : -1);
-}
-
-
-
-
-
 const statuses =
     [
         {
@@ -75,39 +60,61 @@ const statuses =
         },
     ];
 
+const sortAZ = (x, y) => {
+    let a = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let b = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
+const sortZA = (x, y) => {
+    let b = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let a = y.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return (a == b ? 0 : a > b ? 1 : -1);
+}
 const sortLeastThreat = (x, y) => {
     let a, b;
     statuses.forEach(obj => {
-        if (obj.status === x.status) {
+        if (obj.status === x.status)
             a = obj.threat_level;
-        }
-        if (obj.status === y.status) {
+        if (obj.status === y.status)
             b = obj.threat_level;
-        }
-
     });
     return (a == b ? 0 : a > b ? 1 : -1);
 }
-
 const sortMostThreat = (x, y) => {
     let a, b;
     statuses.forEach(obj => {
-        if (obj.status === x.status) {
+        if (obj.status === x.status)
             b = obj.threat_level;
-        }
-        if (obj.status === y.status) {
+        if (obj.status === y.status)
             a = obj.threat_level;
-        }
-
     });
     return (a == b ? 0 : a > b ? 1 : -1);
 }
 
+const sortLightest = (x, y) => {
+    return x.size.weight.value - y.size.weight.value;
+}
+const sortHeaviest = (x, y) => {
+    return y.size.weight.value - x.size.weight.value;
+}
+const sortSmallest = (x, y) => {
+    return x.size.length.value - y.size.length.value;
+}
+const sortLargest = (x, y) => {
+    return y.size.length.value - x.size.length.value;
+}
 const sortFunctions = new Map();
 sortFunctions.set('A-Z', sortAZ);
 sortFunctions.set('Z-A', sortZA);
 sortFunctions.set('Least Threatened', sortLeastThreat);
 sortFunctions.set('Most Threatened', sortMostThreat);
+sortFunctions.set('Lightest', sortLightest);
+sortFunctions.set('Heaviest', sortHeaviest);
+sortFunctions.set('Smallest', sortSmallest);
+sortFunctions.set('Largest', sortLargest);
+
+
+
 
 const searchInput = document.querySelector('[data-search]');
 const filterButton = document.querySelector('#filter-button');
@@ -117,7 +124,6 @@ searchInput.addEventListener("keypress", e => {
         filterButton.click();
     }
 });
-
 
 
 filterButton.addEventListener('click', e => {
@@ -285,6 +291,7 @@ function fetchData() {
                 bird.articleElement = createBirdElement(bird);
             }
             birds = data;
+            filterButton.click();
 
 
         }) // use the data
