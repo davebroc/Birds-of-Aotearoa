@@ -59,6 +59,8 @@ const statuses =
             color: '#000000'
         },
     ];
+createStatusKeyElements();
+
 
 const sortAZ = (x, y) => {
     let a = x.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -152,7 +154,24 @@ filterButton.addEventListener('click', e => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+function createStatusKeyElements() {
+    const statusTable = document.querySelector('#status-table');
 
+    statuses.forEach(obj => {
+        const circle = document.createElement('dt');
+        const label = document.createElement('dd');
+
+        circle.setAttribute('class', 'circle-key');
+
+        circle.style.backgroundColor = obj.color;
+        label.innerHTML = obj.status;
+
+        statusTable.append(circle);
+        statusTable.append(label);
+
+    });
+
+}
 
 
 
@@ -195,7 +214,6 @@ function newBirdHeaderElement(className, data) {
 
     return header;
 }
-
 
 
 function newImageOverlayElement(className, data) {
