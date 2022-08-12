@@ -116,7 +116,13 @@ sortFunctions.set('Smallest', sortSmallest);
 sortFunctions.set('Largest', sortLargest);
 
 
+// clearButton.addEventListener("click", e => {
+//     searchInput.value = "";
+//     statusFilter.value = "All";
+//     sortby.value = "A-Z";
 
+//     filterButton.click();
+// });
 
 const searchInput = document.querySelector('[data-search]');
 const filterButton = document.querySelector('#filter-button');
@@ -279,17 +285,18 @@ function newDescriptionKeyValue(textBox, key, data) {
         valueLine.innerHTML = data.size[key].value + ' ' + data.size[key].units;
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
 
-    } else if ((key === 'family' || key === 'order')) {
+        // } else if ((key === 'family' || key === 'order')) {
 
-        const valueLink = document.createElement('a');
-        valueLink.addEventListener('click', e => {
-            searchInput.value = data[key];
-            filterButton.click();
-        });
+        //     const valueLink = document.createElement('a');
+        //     valueLink.addEventListener('click', e => {
+        //         searchInput.value = data[key];
+        //         filterButton.click();
+        //     });
 
-        valueLink.innerHTML = data[key];
-        keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
-        valueLine.append(valueLink);
+        //     valueLink.innerHTML = data[key];
+        //     keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
+        //     valueLine.append(valueLink);
+
     } else {
         valueLine.innerHTML = data[key];
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
