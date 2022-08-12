@@ -53,7 +53,7 @@ main {
 label {
     font-size: 0.8rem;
     color: rgb(100, 100, 100);
-    margin-bottom: 0;
+    margin: 0;
 }
 
 #filter-and-status-wrapper>select {
@@ -61,7 +61,20 @@ label {
     height: 1.2rem;
 }
 
-#filter-and-status-wrapper>button {
+#clear-count-box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0rem;
+    align-items: center;
+}
+
+#clear {
+    margin: 0;
+    float: right;
+
+}
+
+#filter-button {
     line-height: 2rem;
     background-color: rgb(4, 121, 231);
     border-radius: 0.5rem;
@@ -75,7 +88,7 @@ label {
     cursor: pointer;
 }
 
-#filter-and-status-wrapper>button:active {
+#filter-button:active {
     transition: 0.3s;
     background-color: rgb(2, 106, 202);
     box-shadow: 0 1px #666;
@@ -189,6 +202,9 @@ dd {
 .birdArticle a {
     color: rgb(0, 87, 169);
 }
+
+
+
 
 
 .birdArticle {

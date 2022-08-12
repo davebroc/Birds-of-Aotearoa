@@ -116,16 +116,12 @@ sortFunctions.set('Smallest', sortSmallest);
 sortFunctions.set('Largest', sortLargest);
 
 
-// clearButton.addEventListener("click", e => {
-//     searchInput.value = "";
-//     statusFilter.value = "All";
-//     sortby.value = "A-Z";
-
-//     filterButton.click();
-// });
 
 const searchInput = document.querySelector('[data-search]');
 const filterButton = document.querySelector('#filter-button');
+const clearButton = document.querySelector('#clear');
+const sortby = document.querySelector('#sortby');
+const statusFilter = document.querySelector('#conservation-selector');
 
 searchInput.addEventListener("keypress", e => {
     if (e.key === "Enter") {
@@ -133,16 +129,21 @@ searchInput.addEventListener("keypress", e => {
     }
 });
 
+clearButton.addEventListener("click", e => {
+    searchInput.value = "";
+    statusFilter.value = "All";
+    sortby.value = "A-Z";
+
+    filterButton.click();
+});
 
 filterButton.addEventListener('click', e => {
     const searchInput = document.querySelector('[data-search]');
     const searchValue = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    const statusFilter = document.querySelector('#conservation-selector');
     const statusValue = statusFilter.value;
     const isStatusAll = statusValue === "All";
 
-    const sortby = document.querySelector('#sortby');
     birds.sort(sortFunctions.get(sortby.value));
 
     const countLabel = document.querySelector('#results-counter');
@@ -286,17 +287,17 @@ function newDescriptionKeyValue(textBox, key, data) {
         valueLine.innerHTML = data.size[key].value + ' ' + data.size[key].units;
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
 
-        // } else if ((key === 'family' || key === 'order')) {
+    } else if ((key === 'family' || key === 'order')) {
 
-        //     const valueLink = document.createElement('a');
-        //     valueLink.addEventListener('click', e => {
-        //         searchInput.value = data[key];
-        //         filterButton.click();
-        //     });
+        const valueLink = document.createElement('a');
+        valueLink.addEventListener('click', e => {
+            searchInput.value = data[key];
+            filterButton.click();
+        });
 
-        //     valueLink.innerHTML = data[key];
-        //     keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
-        //     valueLine.append(valueLink);
+        valueLink.innerHTML = data[key];
+        keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
+        valueLine.append(valueLink);
 
     } else {
         valueLine.innerHTML = data[key];
