@@ -147,7 +147,8 @@ filterButton.addEventListener('click', e => {
 
     const countLabel = document.querySelector('#results-counter');
 
-    let i, count = 0;
+    let i = 0;
+    let count = 0;
     birds.forEach(bird => {
         const isSearched = bird.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(searchValue) || bird.english_name.toLowerCase().includes(searchValue) || bird.scientific_name.toLowerCase().includes(searchValue) || bird.family.toLowerCase().includes(searchValue) || bird.order.toLowerCase().includes(searchValue);
         const isStatus = bird.status.includes(statusValue) || isStatusAll;
