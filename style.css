@@ -82,8 +82,8 @@ label {
 #filter-and-status-wrapper>select {
     margin-top: 0rem;
     height: 1.2rem;
-    background-color: var(--section-color);
-    color: var(--primary-text-color);
+    /* background-color: var(--section-color);
+    color: var(--primary-text-color); */
 }
 
 #clear-count-box {
@@ -124,8 +124,8 @@ label {
     line-height: 1.5rem;
     margin-top: 0rem;
     border-radius: 0.2rem;
-    background-color: var(--section-color);
-    color: var(--primary-text-color);
+    /* background-color: var(--section-color);
+    color: var(--primary-text-color); */
 }
 
 .hide {
