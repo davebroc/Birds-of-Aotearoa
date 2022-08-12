@@ -122,6 +122,33 @@ const filterButton = document.querySelector('#filter-button');
 const clearButton = document.querySelector('#clear');
 const sortby = document.querySelector('#sortby');
 const statusFilter = document.querySelector('#conservation-selector');
+const switchThemeButton = document.querySelector('#switch-theme');
+
+let themeStatus = "light";
+
+switchThemeButton.addEventListener('click', e => {
+    const root = document.querySelector(':root');
+
+    if (themeStatus === "light") {
+        root.style.setProperty('--main-color', '#333');
+        root.style.setProperty('--section-color', '#555');
+        root.style.setProperty('--primary-text-color', 'white');
+        root.style.setProperty('--softwhite', '#444');
+        root.style.setProperty('--blue-link-color', 'lightblue');
+        root.style.setProperty('--label-color', '#f6f4f4');
+        themeStatus = "dark";
+    } else {
+        root.style.setProperty('--main-color', 'lightgray');
+        root.style.setProperty('--section-color', 'white');
+        root.style.setProperty('--primary-text-color', 'black');
+        root.style.setProperty('--softwhite', '#f6f4f4');
+        root.style.setProperty('--blue-link-color', '#0057a9');
+        root.style.setProperty('--label-color', '#646464');
+        themeStatus = "light";
+    }
+
+
+});
 
 searchInput.addEventListener("keypress", e => {
     if (e.key === "Enter") {
