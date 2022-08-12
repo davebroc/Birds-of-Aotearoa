@@ -71,6 +71,7 @@ label {
 #clear {
     margin: 0;
     float: right;
+    cursor: pointer;
 
 }
 
@@ -201,6 +202,7 @@ dd {
 
 .birdArticle a {
     color: rgb(0, 87, 169);
+    cursor: pointer;
 }
 
 
