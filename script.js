@@ -139,8 +139,9 @@ filterButton.addEventListener('click', e => {
     const sortby = document.querySelector('#sortby');
     birds.sort(sortFunctions.get(sortby.value));
 
+    const countLabel = document.querySelector('#results-counter');
 
-    let i = 0;
+    let i, count = 0;
     birds.forEach(bird => {
         const isSearched = bird.primary_name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(searchValue) || bird.english_name.toLowerCase().includes(searchValue) || bird.scientific_name.toLowerCase().includes(searchValue) || bird.family.toLowerCase().includes(searchValue) || bird.order.toLowerCase().includes(searchValue);
         const isStatus = bird.status.includes(statusValue) || isStatusAll;
@@ -149,8 +150,10 @@ filterButton.addEventListener('click', e => {
         bird.articleElement.classList.toggle('hide', !isVisible);
 
         bird.articleElement.style.order = i++;
+        if (isVisible) count++;
     });
-
+    const labelString = count === 1 ? " result" : " results";
+    countLabel.innerHTML = count.toString().concat(labelString);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
@@ -276,6 +279,17 @@ function newDescriptionKeyValue(textBox, key, data) {
         valueLine.innerHTML = data.size[key].value + ' ' + data.size[key].units;
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
 
+    } else if ((key === 'family' || key === 'order')) {
+
+        const valueLink = document.createElement('a');
+        valueLink.addEventListener('click', e => {
+            searchInput.value = data[key];
+            filterButton.click();
+        });
+
+        valueLink.innerHTML = data[key];
+        keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();
+        valueLine.append(valueLink);
     } else {
         valueLine.innerHTML = data[key];
         keyLine.innerHTML = key[0].toUpperCase().bold() + key.replaceAll('_', ' ').substring(1).bold();

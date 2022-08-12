@@ -186,7 +186,9 @@ dd {
 
 
 
-
+.birdArticle a {
+    color: rgb(0, 87, 169);
+}
 
 
 .birdArticle {
