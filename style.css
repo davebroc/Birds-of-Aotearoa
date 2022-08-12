@@ -39,6 +39,8 @@ body {
     /* grid-auto-rows: 1vh minmax(20fr, auto) 0.5fr; */
     color: var(--primary-text-color);
     margin: 0;
+    transition: 0.4s;
+
 }
 
 main {
@@ -82,8 +84,10 @@ label {
 #filter-and-status-wrapper>select {
     margin-top: 0rem;
     height: 1.2rem;
-    /* background-color: var(--section-color);
-    color: var(--primary-text-color); */
+    background-color: var(--section-color);
+    color: var(--primary-text-color);
+    border: 1px solid rgb(53, 53, 53);
+    border-radius: 0.2rem;
 }
 
 #clear-count-box {
@@ -94,10 +98,16 @@ label {
 }
 
 #clear {
-    margin: 0;
-    float: right;
-    cursor: pointer;
+    background-color: var(--softwhite);
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    color: var(--primary-text-color);
+}
 
+
+#clear:active {
+    box-shadow: 0 1px black;
+    background-color: var(--section-color);
 }
 
 #filter-button {
@@ -110,7 +120,7 @@ label {
     font-weight: 700;
 }
 
-#filter-and-status-wrapper>button:hover {
+button:hover {
     cursor: pointer;
 }
 
@@ -124,8 +134,10 @@ label {
     line-height: 1.5rem;
     margin-top: 0rem;
     border-radius: 0.2rem;
-    /* background-color: var(--section-color);
-    color: var(--primary-text-color); */
+    background-color: var(--section-color);
+    color: var(--primary-text-color);
+    border: 1px solid rgb(53, 53, 53);
+
 }
 
 .hide {
