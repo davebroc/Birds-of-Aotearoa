@@ -27,10 +27,35 @@ header {
     position: relative;
 }
 
-#switch-theme {
+#theme-button {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     right: 1rem;
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    padding: 0.5rem;
+    transition: 0.4s;
+}
+
+#theme-button:active {
+    transform: scale(1.06) translateY(-50%);
+    transform-origin: top;
+
+}
+
+#theme-button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.theme-icon {
+    height: 2rem;
+    width: 2rem;
 }
 
 body {

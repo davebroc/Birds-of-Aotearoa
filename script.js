@@ -122,7 +122,7 @@ const filterButton = document.querySelector('#filter-button');
 const clearButton = document.querySelector('#clear');
 const sortby = document.querySelector('#sortby');
 const statusFilter = document.querySelector('#conservation-selector');
-const switchThemeButton = document.querySelector('#switch-theme');
+const switchThemeButton = document.querySelector('#theme-button');
 
 let themeStatus = "light";
 
