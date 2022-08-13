@@ -40,13 +40,11 @@ header {
     align-items: center;
     border-radius: 20%;
     padding: 0.5rem;
-    transition: 0.4s;
 }
 
 #theme-button:active {
     transform: scale(1.06) translateY(-50%);
     transform-origin: top;
-
 }
 
 #theme-button:hover {

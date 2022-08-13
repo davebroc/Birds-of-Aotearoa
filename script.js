@@ -130,14 +130,23 @@ switchThemeButton.addEventListener('click', e => {
     const root = document.querySelector(':root');
 
     if (themeStatus === "light") {
+        switchThemeButton.children[0].classList.toggle('hide', true);
+        switchThemeButton.children[1].classList.toggle('hide', false);
+
         root.style.setProperty('--main-color', '#333');
         root.style.setProperty('--section-color', '#555');
         root.style.setProperty('--primary-text-color', 'white');
         root.style.setProperty('--softwhite', '#444');
         root.style.setProperty('--blue-link-color', 'lightblue');
         root.style.setProperty('--label-color', '#f6f4f4');
+
+        // switchThemeButton.innerHTML = "Dark";
+
         themeStatus = "dark";
     } else {
+        switchThemeButton.children[0].classList.toggle('hide', false);
+        switchThemeButton.children[1].classList.toggle('hide', true);
+
         root.style.setProperty('--main-color', 'lightgray');
         root.style.setProperty('--section-color', 'white');
         root.style.setProperty('--primary-text-color', 'black');
@@ -360,6 +369,7 @@ function fetchData() {
             }
             birds = data;
             filterButton.click();
+            switchThemeButton.children[1].classList.toggle('hide', true);
 
 
         }) // use the data
