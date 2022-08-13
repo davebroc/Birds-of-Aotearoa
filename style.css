@@ -59,7 +59,6 @@ header {
 body {
     display: grid;
     grid-template-columns: minmax(10rem, 14rem) 7fr;
-    /* grid-auto-rows: 1vh minmax(20fr, auto) 0.5fr; */
     color: var(--primary-text-color);
     margin: 0;
     transition: 0.4s;
